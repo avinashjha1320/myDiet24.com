@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>New</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+    />
+    <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+  </head>
+  <body class="text-gray-400 bg-gray-900 body-font relative h-screen">
+    <section>
+      <div class="container px-5 py-24 mx-auto">
+        <div class="flex flex-col text-center w-full mb-12">
+          <h1
+            class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white"
+          >
+            New article
+          </h1>
+          <a href="/auth/profile" class="btn">Back to Profile</a>
+        </div>
+
+        <form action="/blogs" method="POST" enctype="multipart/form-data">
+          <div class="lg:w-1/2 md:w-2/3 mx-auto">
+            <div class="flex flex-wrap -m-2">
+              <div class="p-2 w-full">
+                <div class="relative">
+                  <label for="name" class="leading-7 text-sm text-gray-400"
+                    >Title ( keep it short )</label
+                  >
+                  <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-green-500 focus:bg-gray-900 focus:ring-2 focus:ring-green-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    placeholder="Title"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="p-2 w-full">
+                <div class="relative">
+                  <label
+                    for="metaDescription"
+                    class="leading-7 text-sm text-gray-400"
+                    >Meta description ( Recommended maximum 2 lines )</label
+                  >
+                  <textarea
+                    id="metaDescription"
+                    name="metaDescription"
+                    class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-green-500 focus:bg-gray-900 focus:ring-2 focus:ring-green-900 h-32 text-base outline-none text-gray-100 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                  >
+This article is...</textarea
+                  >
+                </div>
+              </div>
+              <div class="p-2 w-full">
+                <div class="relative">
+                  <label for="thumbnail" class="leading-7 text-sm text-gray-400"
+                    >Thumbnail ( Recommended dark background for good contrast
+                    )</label
+                  >
+                  <input
+                    type="file"
+                    id="thumbnail"
+                    name="thumbnail"
+                    class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-green-500 focus:bg-gray-900 focus:ring-2 focus:ring-green-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    required
+                  />
+                  <img
+                    src=""
+                    alt="Thumbnail"
+                    height="300px"
+                    width="300px"
+                    id="thumbnailPreview"
+                    style="display: none"
+                  />
+                </div>
+              </div>
+              <div class="p-2 w-full">
+                <div class="relative">
+                  <label
+                    for="categories"
+                    class="leading-7 text-sm text-gray-400"
+                    >Categories / Keywords</label
+                  >
+                  <input
+                    type="text"
+                    id="categories"
+                    name="categories"
+                    class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-green-500 focus:bg-gray-900 focus:ring-2 focus:ring-green-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    placeholder="Enter comma separated values"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="p-2 w-full">
+                <div class="relative">
+                  <label for="editor" class="leading-7 text-sm text-gray-400"
+                    >Description ( Recommended full screen )</label
+                  >
+                  <textarea
+                    id="editor"
+                    name="description"
+                    class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-green-500 focus:bg-gray-900 focus:ring-2 focus:ring-green-900 h-32 text-base outline-none text-gray-100 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                  >
+Content goes here...</textarea
+                  >
+                </div>
+              </div>
+              <div class="p-2 w-full">
+                <button
+                  type="submit"
+                  class="flex mx-auto text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg"
+                >
+                  Publish
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <script>
+      function updateAllMessageForms() {
+        for (instance in CKEDITOR.instances) {
+          CKEDITOR.instances[instance].updateElement();
+        }
+      }
+    </script>
+    <script>
+      CKEDITOR.replace("editor");
+    </script>
+    <script>
+      document.querySelector("#thumbnail").addEventListener("change", (e) => {
+        document.querySelector("#thumbnailPreview").src = URL.createObjectURL(
+          e.target.files[0]
+        );
+        document.querySelector("#thumbnailPreview").style.display = "block";
+      });
+    </script>
+  </body>
+</html>
